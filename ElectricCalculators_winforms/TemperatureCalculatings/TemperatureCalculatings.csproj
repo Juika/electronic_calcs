@@ -92,5 +92,11 @@
   <ItemGroup>
     <None Include="Resources\250px-1st_Order_Lowpass_Filter_RC.svg.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_gallery.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_gallery %281%29.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

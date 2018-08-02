@@ -30,8 +30,6 @@
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox_lowpass_filter = new System.Windows.Forms.PictureBox();
-            this.pictureBox_temperature = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,8 +48,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).BeginInit();
+            this.pictureBox_dependences = new System.Windows.Forms.PictureBox();
+            this.pictureBox_temperature = new System.Windows.Forms.PictureBox();
+            this.pictureBox_lowpass_filter = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dependences)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_temperature)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -64,7 +66,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(174, 24);
             this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "Temperature";
+            this.comboBox1.Text = "Calculators";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
@@ -76,29 +78,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Choose calculator";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // pictureBox_lowpass_filter
-            // 
-            this.pictureBox_lowpass_filter.Image = global::TemperatureCalculatings.Properties.Resources._250px_1st_Order_Lowpass_Filter_RC_svg;
-            this.pictureBox_lowpass_filter.Location = new System.Drawing.Point(457, 32);
-            this.pictureBox_lowpass_filter.Name = "pictureBox_lowpass_filter";
-            this.pictureBox_lowpass_filter.Size = new System.Drawing.Size(447, 286);
-            this.pictureBox_lowpass_filter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_lowpass_filter.TabIndex = 3;
-            this.pictureBox_lowpass_filter.TabStop = false;
-            this.pictureBox_lowpass_filter.Visible = false;
-            // 
-            // pictureBox_temperature
-            // 
-            this.pictureBox_temperature.Enabled = false;
-            this.pictureBox_temperature.Image = global::TemperatureCalculatings.Properties.Resources.junction_temperature_life_indium_thermal_interface_material_2;
-            this.pictureBox_temperature.Location = new System.Drawing.Point(457, 9);
-            this.pictureBox_temperature.Name = "pictureBox_temperature";
-            this.pictureBox_temperature.Size = new System.Drawing.Size(447, 309);
-            this.pictureBox_temperature.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_temperature.TabIndex = 2;
-            this.pictureBox_temperature.TabStop = false;
-            this.pictureBox_temperature.Visible = false;
             // 
             // textBox2
             // 
@@ -267,7 +246,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(452, 464);
+            this.label9.Location = new System.Drawing.Point(12, 560);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(77, 25);
             this.label9.TabIndex = 1;
@@ -279,7 +258,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(452, 435);
+            this.label10.Location = new System.Drawing.Point(12, 535);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 25);
             this.label10.TabIndex = 1;
@@ -287,15 +266,51 @@
             this.label10.Visible = false;
             this.label10.Click += new System.EventHandler(this.label1_Click);
             // 
+            // pictureBox_dependences
+            // 
+            this.pictureBox_dependences.Enabled = false;
+            this.pictureBox_dependences.Image = global::TemperatureCalculatings.Properties.Resources.image_gallery__1_;
+            this.pictureBox_dependences.Location = new System.Drawing.Point(508, 242);
+            this.pictureBox_dependences.Name = "pictureBox_dependences";
+            this.pictureBox_dependences.Size = new System.Drawing.Size(555, 378);
+            this.pictureBox_dependences.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_dependences.TabIndex = 2;
+            this.pictureBox_dependences.TabStop = false;
+            this.pictureBox_dependences.Visible = false;
+            // 
+            // pictureBox_temperature
+            // 
+            this.pictureBox_temperature.Enabled = false;
+            this.pictureBox_temperature.Image = global::TemperatureCalculatings.Properties.Resources.image_gallery;
+            this.pictureBox_temperature.Location = new System.Drawing.Point(522, 12);
+            this.pictureBox_temperature.Name = "pictureBox_temperature";
+            this.pictureBox_temperature.Size = new System.Drawing.Size(483, 224);
+            this.pictureBox_temperature.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_temperature.TabIndex = 2;
+            this.pictureBox_temperature.TabStop = false;
+            this.pictureBox_temperature.Visible = false;
+            // 
+            // pictureBox_lowpass_filter
+            // 
+            this.pictureBox_lowpass_filter.Image = global::TemperatureCalculatings.Properties.Resources._250px_1st_Order_Lowpass_Filter_RC_svg;
+            this.pictureBox_lowpass_filter.Location = new System.Drawing.Point(457, 32);
+            this.pictureBox_lowpass_filter.Name = "pictureBox_lowpass_filter";
+            this.pictureBox_lowpass_filter.Size = new System.Drawing.Size(447, 286);
+            this.pictureBox_lowpass_filter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_lowpass_filter.TabIndex = 3;
+            this.pictureBox_lowpass_filter.TabStop = false;
+            this.pictureBox_lowpass_filter.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 645);
+            this.ClientSize = new System.Drawing.Size(1035, 655);
+            this.Controls.Add(this.pictureBox_dependences);
+            this.Controls.Add(this.pictureBox_temperature);
             this.Controls.Add(this.pictureBox_lowpass_filter);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.pictureBox_temperature);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
@@ -319,8 +334,9 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Calculators";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dependences)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_temperature)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,6 +366,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBox_dependences;
     }
 }
 

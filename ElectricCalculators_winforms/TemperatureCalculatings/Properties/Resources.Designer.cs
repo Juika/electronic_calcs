@@ -73,6 +73,26 @@ namespace TemperatureCalculatings.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap image_gallery {
+            get {
+                object obj = ResourceManager.GetObject("image_gallery", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap image_gallery__1_ {
+            get {
+                object obj = ResourceManager.GetObject("image_gallery (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap junction_temperature_life_indium_thermal_interface_material_2 {
             get {
                 object obj = ResourceManager.GetObject("junction_temperature_life_indium_thermal_interface_material_2", resourceCulture);
