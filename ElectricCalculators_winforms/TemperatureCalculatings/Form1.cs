@@ -16,10 +16,9 @@ namespace TemperatureCalculatings
         {
             InitializeComponent();
         }
-
         private void label1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -136,21 +135,32 @@ namespace TemperatureCalculatings
             }
             else if (comboBox1.Text == "Low-pass filter")
             {
-                    double cut_off_frequency;
-                    textBox2.Text = textBox2.Text.Replace('.', ',');
-                    textBox3.Text = textBox3.Text.Replace('.', ',');
-                    double resisitor_val = Convert.ToDouble(textBox2.Text);
-                    double cap_val = Convert.ToDouble(textBox3.Text);
-                label9.Visible = true;
-                cut_off_frequency = 1000000000 / (6.28 * cap_val * resisitor_val);
+                textBox2.Text = textBox2.Text.Replace('.', ',');
+                textBox3.Text = textBox3.Text.Replace('.', ',');
+                double resisitor_val = Convert.ToDouble(textBox2.Text);
+                double cap_val = Convert.ToDouble(textBox3.Text);
                 if (cap_val <= 0 || resisitor_val <= 0)
                     label9.Text = "Wrong input value";
                 else
                 {
+                    double cut_off_frequency, Vout = 0, Vin = 5, Xc;
+                    label9.Visible = true;
+                    cut_off_frequency = 1000000000 / (6.28 * cap_val * resisitor_val);
+
+                    
+
                     label10.Text = "Cut-off frequency (LPF):";
                     label10.Visible = true;
                     label9.Visible = true;
                     label9.Text = Convert.ToString(cut_off_frequency) + " Hz";
+                    for (int i = 0; i < (cut_off_frequency + cut_off_frequency / 10); i += (int)cut_off_frequency / 100) {
+                        Xc = Math.Pow(10,9)/(6.28*cap_val);
+                        Vout = Vin * (Xc / Math.Sqrt(Math.Pow(resisitor_val, 2) + Math.Pow(Xc, 2)));
+                        chart1.Series["Series1"].Points.AddXY(i, Vout);
+                        if (Vout <= 0.718)
+                            return;
+                    }
+                    
                 }
             }
         }
@@ -185,5 +195,6 @@ namespace TemperatureCalculatings
                 }
             
         }
+
     }
 }

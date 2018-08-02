@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -51,9 +54,11 @@
             this.pictureBox_dependences = new System.Windows.Forms.PictureBox();
             this.pictureBox_temperature = new System.Windows.Forms.PictureBox();
             this.pictureBox_lowpass_filter = new System.Windows.Forms.PictureBox();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dependences)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_temperature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -301,11 +306,29 @@
             this.pictureBox_lowpass_filter.TabStop = false;
             this.pictureBox_lowpass_filter.Visible = false;
             // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(522, 324);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(501, 308);
+            this.chart1.TabIndex = 7;
+            this.chart1.Text = "chart1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1035, 655);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.pictureBox_dependences);
             this.Controls.Add(this.pictureBox_temperature);
             this.Controls.Add(this.pictureBox_lowpass_filter);
@@ -337,6 +360,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dependences)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_temperature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,6 +391,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox_dependences;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
