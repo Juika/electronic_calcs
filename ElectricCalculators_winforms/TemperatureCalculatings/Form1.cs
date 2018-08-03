@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace TemperatureCalculatings
 {
@@ -15,7 +16,6 @@ namespace TemperatureCalculatings
         public Form1()
         {
             InitializeComponent();
-            chart1.Series.Add("Series2");
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -179,7 +179,7 @@ namespace TemperatureCalculatings
                     if (cap_val <= 0 || resisitor_val <= 0)
                         label9.Text = "Wrong input value or out of range";
                         else
-                        {                    
+                        {
                             button1.Enabled = false;
                             double cut_off_frequency, Vout = 0, Vin = 0, Xc;
                             label9.Visible = true;
@@ -226,25 +226,20 @@ namespace TemperatureCalculatings
                             label9.Visible = true;
                             label9.Text = Convert.ToString(cut_off_frequency) + " Hz";
 
-                            chart1.Series["Series1"].Points.Clear();
-                                chart1.ChartAreas[0].AxisX.IsLogarithmic = true;
-                        
+                        chart1.Series["Series1"].Points.Clear();
                         chart1.Series["Series2"].Points.Clear();
+                        chart1.ChartAreas[0].AxisX.IsLogarithmic = true;
                         
-                        for (double i = 1; i < (cut_off_frequency + cut_off_frequency / 10); i += cut_off_frequency / 100)
+                        
+                        double Gain = 0;
+                            for (double i = 1; i < (cut_off_frequency + cut_off_frequency / 10) && Gain >= -3; i += cut_off_frequency / 100)
                             {
                                 Xc = pow_val_cap / (6.28 * cap_val * i);
                                 Vout = Vin * (Xc / Math.Sqrt(Math.Pow(resisitor_val, 2) + Math.Pow(Xc, 2)));
                                 chart1.Series["Series1"].Points.AddXY(i, Vout);
-                            double Gain = 20 * Math.Log(Vout / Vin);
+                            Gain = 20 * Math.Log(Vout / Vin);
                             chart1.Series["Series2"].Points.AddXY(i, Gain);
-                            if (Gain <= -3)
-                            {
-                                button1.Enabled = true;
-                                return;
                             }
-                        }
-                        
                         button1.Enabled = true;
                         }
                     }
@@ -261,7 +256,7 @@ namespace TemperatureCalculatings
                 if (checkBox1.CheckState == CheckState.Checked)
                 {
                 label10.Text = "Tj = P * (Rjc + Rcr + Rra) + Ta";
-
+                
                 label4.Visible = false;
                 textBox4.Visible = false;
                 label5.Visible = true;
@@ -285,6 +280,5 @@ namespace TemperatureCalculatings
                 }
             
         }
-
     }
 }
