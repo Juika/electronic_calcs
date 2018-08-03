@@ -55,6 +55,8 @@
             this.pictureBox_temperature = new System.Windows.Forms.PictureBox();
             this.pictureBox_lowpass_filter = new System.Windows.Forms.PictureBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dependences)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_temperature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_lowpass_filter)).BeginInit();
@@ -322,12 +324,38 @@
             this.chart1.Size = new System.Drawing.Size(501, 308);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
+            this.chart1.Visible = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Ohm",
+            "kOhm",
+            "MOhm",
+            "GOhm"});
+            this.comboBox2.Location = new System.Drawing.Point(130, 114);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(74, 24);
+            this.comboBox2.TabIndex = 8;
+            this.comboBox2.Visible = false;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(129, 160);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(74, 24);
+            this.comboBox3.TabIndex = 8;
+            this.comboBox3.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1035, 655);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.pictureBox_dependences);
             this.Controls.Add(this.pictureBox_temperature);
@@ -392,6 +420,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox_dependences;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }
 

@@ -15,6 +15,7 @@ namespace TemperatureCalculatings
         public Form1()
         {
             InitializeComponent();
+            chart1.Series.Add("Series2");
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -64,14 +65,34 @@ namespace TemperatureCalculatings
                 reset_values();
                 pictureBox_lowpass_filter.Visible = true;
 
-                label2.Text = "Resistor (R), Ohm:";
-                label3.Text = "Capacitor (C), nF:";
-                label2.Visible = true;
-                label3.Visible = true;
+                label2.Text = "Resistor (R):";
+                comboBox2.Visible = true;
+                comboBox2.Items.Clear();
+                comboBox2.Items.Add("Ohm");
+                comboBox2.Items.Add("kOhm");
+                comboBox2.Items.Add("MOhm");
+                comboBox2.Items.Add("GOhm");
+                comboBox2.SelectedItem = "Ohm";
+
+                label3.Text = "Capacitor (C):";
+                label4.Text = "Vin (V) =";
+
+                comboBox3.Visible = true;
+                comboBox3.Items.Clear();
+                comboBox3.Items.Add("pF");
+                comboBox3.Items.Add("nF");
+                comboBox3.Items.Add("uF");
+                comboBox3.Items.Add("mF");
+                comboBox3.SelectedItem = "nF";
+
+                label2.Visible = true;//Resistor val
+                label3.Visible = true;//Cap val
+                label4.Visible = true;//Vin, V
 
                 textBox2.Visible = true;
                 textBox3.Visible = true;
-
+                textBox4.Visible = true;
+                
                 button1.Visible = true;
                 button1.Text = "Calculate";
                 
@@ -109,6 +130,15 @@ namespace TemperatureCalculatings
             button1.Visible = false;
 
             checkBox1.Visible = false;
+
+            comboBox2.Visible = false;
+            comboBox2.Items.Clear();
+            comboBox3.Visible = false;
+            comboBox3.Items.Clear();
+
+            chart1.Visible = false;
+            chart1.Series["Series1"].Points.Clear();
+            chart1.Series["Series2"].Points.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -135,33 +165,93 @@ namespace TemperatureCalculatings
             }
             else if (comboBox1.Text == "Low-pass filter")
             {
-                textBox2.Text = textBox2.Text.Replace('.', ',');
-                textBox3.Text = textBox3.Text.Replace('.', ',');
-                double resisitor_val = Convert.ToDouble(textBox2.Text);
-                double cap_val = Convert.ToDouble(textBox3.Text);
-                if (cap_val <= 0 || resisitor_val <= 0)
-                    label9.Text = "Wrong input value";
-                else
-                {
-                    double cut_off_frequency, Vout = 0, Vin = 5, Xc;
-                    label9.Visible = true;
-                    cut_off_frequency = 1000000000 / (6.28 * cap_val * resisitor_val);
+                    try
+                    {
+                    textBox2.Text = textBox2.Text.Replace('.', ',');
+                    textBox3.Text = textBox3.Text.Replace('.', ',');
+                    textBox4.Text = textBox4.Text.Replace('.', ',');
 
                     
+                    double resisitor_val = Convert.ToDouble(textBox2.Text);
+                    double cap_val = Convert.ToDouble(textBox3.Text);
+                    double pow_val, pow_val_cap = 1000000000, pow_val_res = 1;//значение обратное например 10^-9
 
-                    label10.Text = "Cut-off frequency (LPF):";
-                    label10.Visible = true;
-                    label9.Visible = true;
-                    label9.Text = Convert.ToString(cut_off_frequency) + " Hz";
-                    for (int i = 0; i < (cut_off_frequency + cut_off_frequency / 10); i += (int)cut_off_frequency / 100) {
-                        Xc = Math.Pow(10,9)/(6.28*cap_val);
-                        Vout = Vin * (Xc / Math.Sqrt(Math.Pow(resisitor_val, 2) + Math.Pow(Xc, 2)));
-                        chart1.Series["Series1"].Points.AddXY(i, Vout);
-                        if (Vout <= 0.718)
-                            return;
+                    if (cap_val <= 0 || resisitor_val <= 0)
+                        label9.Text = "Wrong input value or out of range";
+                        else
+                        {                    
+                            button1.Enabled = false;
+                            double cut_off_frequency, Vout = 0, Vin = 0, Xc;
+                            label9.Visible = true;
+                        chart1.Visible = true;
+
+                        Vin = Convert.ToDouble(textBox4.Text);
+
+                            switch (comboBox3.Text)//capacitor
+                            {
+                                case "nF":
+                                    pow_val_cap *= 1;
+                                    break;
+                                case "pF":
+                                    pow_val_cap *= 1000;
+                                    break;
+                                case "uF":
+                                    pow_val_cap /= 1000;
+                                    break;
+                                case "mF":
+                                    pow_val_cap /= 1000000;
+                                    break;
+                            }
+                            pow_val = pow_val_cap;
+                            switch (comboBox2.Text)//resistor
+                            {
+                                case "Ohm":
+                                    pow_val_res /= 1;
+                                    break;
+                                case "kOhm":
+                                    pow_val_res = 1000;
+                                    break;
+                                case "MOhm":
+                                    pow_val_res = 1000000;
+                                    break;
+                                case "GOhm":
+                                    pow_val_res = 1000000000;
+                                    break;
+                            }
+                    
+
+                            cut_off_frequency = pow_val_cap / pow_val_res / resisitor_val  / cap_val / 6.28;
+                            label10.Text = "Cut-off frequency (LPF):";
+                            label10.Visible = true;
+                            label9.Visible = true;
+                            label9.Text = Convert.ToString(cut_off_frequency) + " Hz";
+
+                            chart1.Series["Series1"].Points.Clear();
+                                chart1.ChartAreas[0].AxisX.IsLogarithmic = true;
+                        
+                        chart1.Series["Series2"].Points.Clear();
+                        
+                        for (double i = 1; i < (cut_off_frequency + cut_off_frequency / 10); i += cut_off_frequency / 100)
+                            {
+                                Xc = pow_val_cap / (6.28 * cap_val * i);
+                                Vout = Vin * (Xc / Math.Sqrt(Math.Pow(resisitor_val, 2) + Math.Pow(Xc, 2)));
+                                chart1.Series["Series1"].Points.AddXY(i, Vout);
+                            double Gain = 20 * Math.Log(Vout / Vin);
+                            chart1.Series["Series2"].Points.AddXY(i, Gain);
+                            if (Gain <= -3)
+                            {
+                                button1.Enabled = true;
+                                return;
+                            }
+                        }
+                        
+                        button1.Enabled = true;
+                        }
                     }
-                    
-                }
+                    catch(FormatException)
+                    {
+                        label9.Text = "Format exception";
+                    }
             }
         }
 
